@@ -30,7 +30,7 @@ class SearchScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: Applayout.getWidth(18),horizontal: Applayout.getWidth(15)),
             decoration: BoxDecoration(
-                color: Color(0xD91130CE),
+                color: const Color(0xD91130CE),
                 borderRadius: BorderRadius.circular(Applayout.getWidth(10))
             ),
           child: Center(
@@ -64,7 +64,7 @@ class SearchScreen extends StatelessWidget {
                       height: Applayout.getHeight(190),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Applayout.getHeight(12)),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
                             "assets/images/sit.jpg"
@@ -88,7 +88,7 @@ class SearchScreen extends StatelessWidget {
                         width: size.width*0.44,
                         height: Applayout.getHeight(200),
                         decoration: BoxDecoration(
-                          color: Color(0xFF3AB8B8),
+                          color: const Color(0xFF3AB8B8),
                           borderRadius: BorderRadius.circular(Applayout.getHeight(18)),
                         ),
                         padding: EdgeInsets.symmetric(vertical: Applayout.getHeight(15),horizontal: Applayout.getHeight(15)),
@@ -108,7 +108,7 @@ class SearchScreen extends StatelessWidget {
                         padding: EdgeInsets.all(Applayout.getHeight(30)),
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(width: 18,color: Color(0xFF189999)),
+                            border: Border.all(width: 18,color: const Color(0xFF189999)),
                             color: Colors.transparent
                         ),
                       )

@@ -1,11 +1,13 @@
 import 'package:booktickets/utils/app_layout.dart';
 import 'package:booktickets/widgets/column_layout.dart';
+import 'package:booktickets/widgets/layout_builder_widget.dart';
 import 'package:booktickets/widgets/thick_container.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_utils/src/platform/platform.dart';
 
 import '../utils/app_styles.dart';
+// import '../widgets/layout_builder_widget.dart';
 
 class TicketView extends StatelessWidget {
   final Map<String, dynamic> ticket;
@@ -45,25 +47,29 @@ class TicketView extends StatelessWidget {
                             children: [
                               SizedBox(
                                   height: Applayout.getHeight(24),
-                                  child: LayoutBuilder(
-                                    builder: (BuildContext context, BoxConstraints constraints) {
-                                      // print("The width is ${constraints.constrainWidth()}");
-                                      return Flex(
-                                        direction: Axis.horizontal,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max, // we maximize the space
-                                        //for larger screen we have more "-" and opposite for smaller screen by using LayoutBuilder, constraintWidth()
-                                        children: List.generate((constraints.constrainWidth() / 6).floor(), (index) =>
-                                            SizedBox(width: 3, height: 1,
-                                              child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    color: isColor==null? Colors.white:Colors.grey.shade300),
-                                              ),
-                                            )),
-                                      );
-                                    },
-                                  )),
-                              Center(child: Transform.rotate(angle: 1.5,child: Icon(Icons.local_airport_rounded,color: isColor==null? Colors.white: Color(0xFF8ACCF7),),)),
+                                child: const AppLayoutBuilderWidget(sections: 6,),
+                              ),
+                              Center(child: Transform.rotate(angle: 1.5,child: Icon(Icons.local_airport_rounded,color: isColor==null? Colors.white: const Color(0xFF8ACCF7),),)),
+
+                              //     child: LayoutBuilder(
+                              //       builder: (BuildContext context, BoxConstraints constraints) {
+                              //         // print("The width is ${constraints.constrainWidth()}");
+                              //         return Flex(
+                              //           direction: Axis.horizontal,
+                              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //           mainAxisSize: MainAxisSize.max, // we maximize the space
+                              //           //for larger screen we have more "-" and opposite for smaller screen by using LayoutBuilder, constraintWidth()
+                              //           children: List.generate((constraints.constrainWidth() / 6).floor(), (index) =>
+                              //               SizedBox(width: 3, height: 1,
+                              //                 child: DecoratedBox(
+                              //                   decoration: BoxDecoration(
+                              //                       color: isColor==null? Colors.white:Colors.grey.shade300),
+                              //                 ),
+                              //               )),
+                              //         );
+                              //       },
+                              //     )),
+                              // Center(child: Transform.rotate(angle: 1.5,child: Icon(Icons.local_airport_rounded,color: isColor==null? Colors.white: const Color(0xFF8ACCF7),),)),
                             ],
                           ),
                         ),
@@ -102,7 +108,7 @@ class TicketView extends StatelessWidget {
                       child: DecoratedBox(decoration: BoxDecoration(
                         color: isColor==null? Colors.grey.shade200: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(Applayout.getHeight(20)),
+                          topRight: Radius.circular(Applayout.getHeight(10)),
                           bottomRight: Radius.circular(Applayout.getHeight(10)),
                         )
                       )),
@@ -155,38 +161,34 @@ class TicketView extends StatelessWidget {
                   children: [
                     AppColumnLayout(firstText: ticket['date'],
                       secondText: "Date", alignment:
-                      CrossAxisAlignment.start,),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(ticket['departure_time'],
-                          style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle3, // use copywith instead foreground operation
-                        ),
-                        const Gap(5),
-                        Text("Departure time",
-                          style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle4, // use copywith instead foreground operation
-                        ),
-                      ],
-                    ),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text('23',
-                          style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle3, // use copywith instead foreground operation
-                        ),
-                        const Gap(5),
-                        Text("Number",
-                          style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle4, // use copywith instead foreground operation
-                        ),
-                      ],
-                    ),
+                        CrossAxisAlignment.start, isColor: isColor),
+                    AppColumnLayout(firstText: ticket['departure_time'],
+                        secondText: "Departure time", alignment:
+                        CrossAxisAlignment.center,isColor: isColor),
+                    AppColumnLayout(firstText: ticket['number'].toString(),
+                        secondText: "Number", alignment:
+                        CrossAxisAlignment.end,isColor: isColor),
+                    //     CrossAxisAlignment.start, isColor:false),
+                    // AppColumnLayout(firstText: ticket['departure_time'],
+                    //     secondText: "Departure time", alignment:
+                    //     CrossAxisAlignment.center, isColor:true),
+                    //
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.end,
+                    //   children: [
+                    //     Text('23',
+                    //       style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle3, // use copywith instead foreground operation
+                    //     ),
+                    //     const Gap(5),
+                    //     Text("Number",
+                    //       style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle4, // use copywith instead foreground operation
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
             ],
-          // ),
         ),
       ),
     );
